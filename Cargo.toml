@@ -2,8 +2,15 @@
 name = "jeanRusty"
 version = "0.1.0"
 authors = ["AlphAEl3ctr0 <raphael.flambard@outlook.fr>"]
+description = "A sample project with wasm-pack"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/AlphAEl3ctr0/jeanRusty"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
+wasm-bindgen = "0.2"

@@ -1,0 +1,39 @@
+<!CTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel = "stylesheet" href = "index.css">
+	<title>JEANRUSTY</title>
+	<!-- <script src = 'wasm/main.wasm'></script> -->
+</head>
+
+<body>
+	<script>
+
+		var memory = new  WebAssembly.Memory({initial:1});
+
+		function  consoleLogString(offset, length) {
+		  var  bytes = new  Uint8Array(memory.buffer, offset, length);
+		  var  string = new  TextDecoder('utf8').decode(bytes);
+		  console.log(string);
+		};
+
+		var  importObject = {
+		  console: {
+			log:  consoleLogString
+		  },
+		  js : {
+			mem:  memory
+		  }
+		};
+
+		WebAssembly.instantiateStreaming(fetch('js/jeanRusty_bg.wasm'), importObject)
+		.then(obj  => {
+		  obj.instance.exports.greet("Adrien");
+		});
+
+	  </script>
+</body>
+
+</html>
